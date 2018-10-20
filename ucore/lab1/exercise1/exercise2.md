@@ -6,7 +6,9 @@
 *  自己找一个bootloader或内核中的代码位置，设置断点并进行测试。
 
 
-## 1 修改 lab1/tools/gdbinit,内容为:
+## 1 修改初始化文件
+ 
+修改 lab1/tools/gdbinit,内容为:
 
 ```
 set architecture i8086
@@ -16,7 +18,9 @@ target remote :1234
 其中`set architecture i8086`设置当前调试的CPU是8086，将指令集设置为16位，若不设置则GDB默认32位，导致反汇编失败。
 
 
-## 2 运行`make debug`开始实验。
+## 2 调试模式运行
+
+运行`make debug`开始实验。
 
 此时，QEMU停在`0x0000fff0`，使用`x/i $cs`命令得到`0xf000: add %al,(%bx,%si)`,使用命令`x/i $eip`命令得到`=> 0xfff0: add %al,(%bx,%si)`,使用命令`x/i $pc`命令得到`=> 0xfff0: add %al,(%bx,%si)`。
 
@@ -29,7 +33,9 @@ target remote :1234
 使用`si`命令，果真跳转到`0xfe05b`开始执行了。
 
 
-## 3 执行`b *0x7c00`在初始化位置`0x7c00`处设下断点，执行`c`使得QEMU继续运行，之后发现在`0x7c00`暂停了，断点有效。
+## 3 设置断点，进行调试
+
+执行`b *0x7c00`在初始化位置`0x7c00`处设下断点，执行`c`使得QEMU继续运行，之后发现在`0x7c00`暂停了，断点有效。
 
 此地址是bootloader入口点地址，可看boot/bootasm.S的start地址处。执行`x/10i 0x7c00`查看反汇编，输出结果为
 ```
