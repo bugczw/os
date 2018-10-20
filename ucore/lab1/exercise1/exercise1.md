@@ -160,4 +160,5 @@
 ## 小结
 
 由Makefile文件中的ucore.img相关代码可以看出，UCOREIMG这个文件依赖于另外两个文件kernel和bootblock。
+
 镜像文件为10000个块的文件，每个块默认512字节，默认用0填充， 把bootblock中的内容写到第一个块，然后从第二个块开始写kernel中的内容

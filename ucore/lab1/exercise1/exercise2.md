@@ -8,7 +8,7 @@
 
 ## 1 修改初始化文件
  
-修改 lab1/tools/gdbinit,内容为:
+修改`lab1/tools/gdbinit`,内容为:
 
 ```
 set architecture i8086
